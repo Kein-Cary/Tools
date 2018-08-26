@@ -1,6 +1,8 @@
 # this file try to find some element in an array
 import numpy as np
 import scipy.stats as st
+
+_all_ = ['find1d','find1ds','find2d','find2ds']
 def find1d(a,b):
     """
     This function is try to find an element in an array
@@ -31,7 +33,8 @@ def find1ds(a,b):
     -------
     data_ip : the index of the element in the given array,in type int 
     for index should be int type
-    PS:this function also can be use to find element like NaN,inf
+    PS:this function also can be use to find element like NaN,inf,but 
+    this part can't be used to find boor type
     """
     da = np.array(a)
     goal = b
@@ -46,7 +49,7 @@ def find1ds(a,b):
         ib = ia.tolist()
         ic = ib.index(True)
         data_ip[k] = ic
-        da[ic] = np.pi
+        da[ic] = np.int0(False)
     return data_ip
 ##find1ds = (a = True,b = True)
 def find2d(a,b):
@@ -86,6 +89,7 @@ def find2ds(a,b):
     return:
     ---------
     data_ip:give the index all the elements in given array 
+    PS :this part can't be used to find boor type
     """
     da = np.array(a)
     goal = b
@@ -109,6 +113,6 @@ def find2ds(a,b):
         Y = ip % B[1]
         data_ip[k,0] = X
         data_ip[k,1] = Y
-        A[ip] = np.pi
+        A[ip] = np.int0(False)
     return data_ip
 #find2ds(a = True,b = True)
