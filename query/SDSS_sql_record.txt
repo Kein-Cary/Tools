@@ -1,0 +1,27 @@
+--this file is used for query all the photometric obj in the sample region
+--- dr7 (version)
+select all
+   p.objID, p.type, p.ra, p.dec, p.u, p.g, p.r, p.i, p.z,
+   s.specObjID, s.z, s.zErr, s.specClass, s.ra, s.dec, 
+   s.plateID, s.fiberMag_u, s.fiberMag_g, s.fiberMag_r,
+   s.fiberMag_i, s.fiberMag_z, 
+
+from PhotoObj AS p
+   JOIN SpecObj AS s ON s.specClass = 6
+
+where
+   p.ra BETWEEN 0.019 AND 359.9 AND p.dec BETWEEN -11.14 AND 68.59512 OR
+   (s.ra BETWEEN 0.019 AND 359.9 AND s.dec BETWEEN -11.14 AND 68.59512)
+
+--- dr12 (version)
+SELECT ALL
+   p.objid,p.ra,p.dec,p.u,p.g,p.r,p.i,p.z,p.type,
+   s.specobjid, s.class, s.z as redshift, s.class
+   
+FROM PhotoObj AS p
+   JOIN SpecObj AS s ON s.class = 'STAR'
+WHERE 
+   p.ra BETWEEN 203.7208 AND 203.9465
+   AND p.dec BETWEEN 40.888 AND 41.114
+   AND p.type = 6
+
