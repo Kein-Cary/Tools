@@ -90,13 +90,17 @@ def sdss_sql():
         #fd = open( '/home/xkchen/mywork/ICL/data/star_catalog/ra%.3f_dec%.3f_z%.3f.csv'%(cord_ra, cord_dec, cord_z), 'w' )
         fd = open( './ra%.3f_dec%.3f_z%.3f.csv'%(cord_ra, cord_dec, cord_z), 'w' )
 
-        sqlcl.write_header( fd, "#", url, qry )
+        #sqlcl.write_header( fd, "#", url, qry )
+
         lines = file.readlines()
 
         for l in lines:
             dtl = l.decode('utf-8')
             fd.write( dtl )
         fd.close()
+
+        if q == 5:
+            break
 
     return
 
