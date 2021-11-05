@@ -1,0 +1,102 @@
+##### query HSC galaxy catalog (with magnitude limitation)
+
+    SELECT
+        object_id, ra, dec,
+        a_g, a_r, a_i,
+        g_cmodel_mag, r_cmodel_mag, i_cmodel_mag,
+        specz_redshift
+
+    FROM
+        pdr3_wide.forced
+        LEFT JOIN pdr3_wide.specz AS specz USING (object_id)
+    WHERE
+        isprimary
+        AND g_cmodel_mag >0
+            AND NOT g_cmodel_mag = 'NaN'
+            AND NOT g_cmodel_mag = 'inf'
+        AND r_cmodel_mag >0
+            AND NOT r_cmodel_mag = 'NaN'
+            AND NOT r_cmodel_mag = 'inf'
+        AND i_cmodel_mag >0
+            AND NOT i_cmodel_mag = 'NaN'
+            AND NOT i_cmodel_mag = 'inf'
+
+        AND i_extendedness_value = 1
+
+        AND NOT i_extendedness_flag
+        AND NOT g_cmodel_flag
+        AND NOT r_cmodel_flag
+        AND NOT i_cmodel_flag
+        AND i_cmodel_mag >= mag_0
+        AND i_cmodel_mag <= mag_1
+
+
+##### using HSC obj_IDs to query
+    WITH
+        -- Describe the catalog to match
+        my_catalog(my_id, my_ra, my_dec) AS (VALUES
+            (NULL::int8, NULL::float8, NULL::float8),
+			(43224722665657008, 172.46470018, 2.93796983),
+			(44191588523470528, 140.53187849, 3.76633851),
+			(43251360052824696, 180.97275624, 1.78346317),
+			(43211240763322376, 168.19808871, 2.50297013),
+			(41693914716982864, 16.54324276, 0.85571472),
+			(44240667114751600, 155.91947755, 4.18753349),
+			(44777344753224256, 337.36449932, 3.28870717),
+			(71178671930498040, 245.22622775, 44.70047377),
+			(41663257240422056, 6.00128458, 0.50204562),
+			(70373155109097920, 228.79440527, 43.66433032)
+        )
+        ,
+
+        match AS (
+            SELECT
+                my_catalog.*,
+                object_id
+
+            FROM
+                my_catalog JOIN pdr3_wide.forced ON (
+                -- Match objects within i.e 1 arcsec
+                coneSearch( coord, my_ra, my_dec, 1 )
+                )
+            )
+    -- The principal clause:
+    --   Filter the above match catalog by conditions
+    --   and select columns other than object_id
+    SELECT
+        match.*,
+        object_id,
+        g_apertureflux_10_flux, r_apertureflux_10_flux, i_apertureflux_10_flux,
+        g_apertureflux_10_fluxerr, r_apertureflux_10_fluxerr, i_apertureflux_10_fluxerr,
+
+        g_apertureflux_15_flux, r_apertureflux_15_flux, i_apertureflux_15_flux,
+        g_apertureflux_15_fluxerr, r_apertureflux_15_fluxerr, i_apertureflux_15_fluxerr,
+
+        g_apertureflux_20_flux, r_apertureflux_20_flux, i_apertureflux_20_flux,
+        g_apertureflux_20_fluxerr, r_apertureflux_20_fluxerr, i_apertureflux_20_fluxerr,
+
+        g_apertureflux_30_flux, r_apertureflux_30_flux, i_apertureflux_30_flux,
+        g_apertureflux_30_fluxerr, r_apertureflux_30_fluxerr, i_apertureflux_30_fluxerr,
+
+        g_apertureflux_40_flux, r_apertureflux_40_flux, i_apertureflux_40_flux,
+        g_apertureflux_40_fluxerr, r_apertureflux_40_fluxerr, i_apertureflux_40_fluxerr,
+
+        g_apertureflux_57_flux, r_apertureflux_57_flux, i_apertureflux_57_flux,
+        g_apertureflux_57_fluxerr, r_apertureflux_57_fluxerr, i_apertureflux_57_fluxerr,
+
+        g_apertureflux_84_flux, r_apertureflux_84_flux, i_apertureflux_84_flux,
+        g_apertureflux_84_fluxerr, r_apertureflux_84_fluxerr, i_apertureflux_84_fluxerr,
+
+        g_apertureflux_118_flux, r_apertureflux_118_flux, i_apertureflux_118_flux,
+        g_apertureflux_118_fluxerr, r_apertureflux_118_fluxerr, i_apertureflux_118_fluxerr,
+
+        g_apertureflux_168_flux, r_apertureflux_168_flux, i_apertureflux_168_flux,
+        g_apertureflux_168_fluxerr, r_apertureflux_168_fluxerr, i_apertureflux_168_fluxerr,
+
+        g_apertureflux_235_flux, r_apertureflux_235_flux, i_apertureflux_235_flux,
+        g_apertureflux_235_fluxerr, r_apertureflux_235_fluxerr, i_apertureflux_235_fluxerr
+
+    FROM
+        match JOIN pdr3_wide.forced3 USING (object_id)
+
+
