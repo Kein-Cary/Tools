@@ -1,5 +1,5 @@
 record how to query and load HSC data ( image or catalog )
-1. download the python package: hscquery from ( https://pypi.org/project/hscquery/ )
+1. download the python package: hscquery from [**here**](https://pypi.org/project/hscquery/)
 2. follow the introduction and install the package
 3. go to the path where you install the hscquery (check the path by 'pip show hscquery' in the terminal)
 4. open the file ‘hscquery.py’
