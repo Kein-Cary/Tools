@@ -1,0 +1,9 @@
+record how to query and load HSC data ( image or catalog )
+1. download the python package: hscquery from https://pypi.org/project/hscquery/
+2. follow the introduction and install the package
+3. go to the path where you install the hscquery (check the path by 'pip show hscquery' in the terminal)
+4. open the file ‘hscquery.py’
+5. here something you need to fix for special query
+   a). find the '__init__' function, change the 'release_version' to the release version that ypu what to load
+   b). find the '__login' function, set the 'passw' and 'user' as constant, 'user' and 'passw' is fixed after you register in HSC
+   c). follow the demo of query jobs in page https://hsc-release.mtk.nao.ac.jp/doc/index.php/data-access__pdr3/
