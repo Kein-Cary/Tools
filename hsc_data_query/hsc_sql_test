@@ -56,8 +56,8 @@
 
             FROM
                 my_catalog JOIN pdr3_wide.forced ON (
-                -- Match objects within i.e 1 arcsec
-                coneSearch( coord, my_ra, my_dec, 1 )
+                -- Match objects within i.e 0.5 arcsec
+                coneSearch( coord, my_ra, my_dec, 0.5 )
                 )
             )
     -- The principal clause:
