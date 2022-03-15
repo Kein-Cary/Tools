@@ -82,3 +82,8 @@ def hist2d_pdf_func(x, y, bins, levels, smooth = None, weights = None,):
 
 #**********************************#
 ##. plot settings
+
+
+
+#**********************************#
+##. array save
