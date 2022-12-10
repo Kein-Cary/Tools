@@ -43,8 +43,13 @@ def simp_finder_func( d_file, out_file, config_file, params_file, tmp_file = Non
 		file_source = '~/pre_detect.fits'
 
 	##.
-	# cmd = 'sex '+ file_source + ' -c %s -CATALOG_NAME %s -PARAMETERS_NAME %s' % (param_A, out_file, out_param)
-	cmd = 'source-extractor '+ file_source + ' -c %s -CATALOG_NAME %s -PARAMETERS_NAME %s' % (param_A, out_file, out_param)
+	try:
+		cmd = ( 'sex '+ file_source + ' -c %s -CATALOG_NAME %s -PARAMETERS_NAME %s' % 
+				(param_A, out_file, out_param), )[0]
+
+	except:
+		cmd = ( 'source-extractor '+ file_source + ' -c %s -CATALOG_NAME %s -PARAMETERS_NAME %s' % 
+				(param_A, out_file, out_param), )[0]
 
 	a = subpro.Popen(cmd, shell = True)
 	a.wait()

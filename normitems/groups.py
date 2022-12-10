@@ -74,24 +74,27 @@ def groups_find_func(img_data, threshold, pont_num = None):
 				continue
 	return source_n, coord_x, coord_y
 
-with h5py.File('test_over-sb.h5', 'r') as f:
-	over_sb = np.array(f['a'])
+if __name__ == "__main__":
 
-lim_sb = 5.
+	with h5py.File('test_over-sb.h5', 'r') as f:
+		over_sb = np.array(f['a'])
 
-source_n, coord_x, coord_y = groups_find_func(over_sb, lim_sb)
+	lim_sb = 5.
 
-plt.figure()
-ax = plt.subplot(111)
-ax.set_title('groups based on over_SB img [$\\Delta $ > %.1f]' % lim_sb)
-tf = ax.imshow(over_sb, origin = 'lower', cmap = 'seismic', vmin = -5, vmax = 5,)
-plt.colorbar(tf, ax = ax, fraction = 0.035, pad = 0.01, label = '$\\Delta = (\\mu_{P} - \\mu_{C})$ / $\\sigma_{C}$')
+	source_n, coord_x, coord_y = groups_find_func(over_sb, lim_sb)
 
-for mm in range( len(source_n) ):
-	tmp_x = np.array(coord_x[mm])
-	tmp_y = np.array(coord_y[mm])
-	ax.scatter(tmp_x, tmp_y, s = 10, color = mpl.cm.hsv(mm / len(source_n) ), marker = 'o', label = 'group %d' % mm)
-ax.legend(loc = 'left center',)
+	plt.figure()
+	ax = plt.subplot(111)
+	ax.set_title('groups based on over_SB img [$\\Delta $ > %.1f]' % lim_sb)
+	tf = ax.imshow(over_sb, origin = 'lower', cmap = 'seismic', vmin = -5, vmax = 5,)
+	plt.colorbar(tf, ax = ax, fraction = 0.035, pad = 0.01, label = '$\\Delta = (\\mu_{P} - \\mu_{C})$ / $\\sigma_{C}$')
 
-plt.savefig('groups_test_%.1f-sigma.png' % lim_sb, dpi = 300)
-plt.close()
+	for mm in range( len(source_n) ):
+		tmp_x = np.array(coord_x[mm])
+		tmp_y = np.array(coord_y[mm])
+		ax.scatter(tmp_x, tmp_y, s = 10, color = mpl.cm.hsv(mm / len(source_n) ), marker = 'o', label = 'group %d' % mm)
+	ax.legend(loc = 'left center',)
+
+	plt.savefig('groups_test_%.1f-sigma.png' % lim_sb, dpi = 300)
+	plt.close()
+
