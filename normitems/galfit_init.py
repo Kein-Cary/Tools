@@ -107,40 +107,98 @@ P) 0                   # Choose: 0=optimize, 1=model, 2=imgblock, 3=subcomps
 
 
 ###... others model
-
-# Nuker function
 extra_model = \
 """
- 0) nuker              # Object type
- 1) 250.  475.  1 1    # position x, y        [pixel]
- 3) 17.2       1       #    mu(Rb)            [surface brightness mag. at Rb]
- 4) 20.5       1       #     Rb               [pixels]
- 5) 1.2        1       #    alpha  (sharpness of transition)
- 6) 0.5        1       #    beta   (outer powerlaw slope)
- 7) 0.7        1       #    gamma  (inner powerlaw slope)
- 9) 0.72       1       # axis ratio (b/a)   
-10) -25.2      1       # position angle (PA)  [Degrees: Up=0, Left=90]
- Z) 0                  #  Skip this model in output image?  (yes=1, no=0)
+ 0) sersic      #  object type
+ 1) 48.5180  51.2800  1 1  #  position x, y
+ 3) 20.0890     1          #  Integrated magnitude	
+ 4) 5.1160      1          #  R_e (effective radius)   [pix]
+ 5) 4.2500      0          #  index of Sersic 
+ 6) 0.0000      0          #     ----- 
+ 7) 0.0000      0          #     ----- 
+ 8) 0.0000      0          #     ----- 
+ 9) 0.7570      1          #  axis ratio (b/a)  
+10) -60.3690    1          #  position angle (PA) [deg: Up=0, Left=90]
+ Z) 0                      #  output option (0 = resid., 1 = Don't subtract) 
 
-# Moffat function
- 
- 0) moffat             # object type
- 1) 372.0  450.0 1 1   # position x, y        [pixel]
- 3) 16.5       1       # total magnitude     
- 4) 0.5        1       #   FWHM               [Pixels]
- 5) 1.5        1       # powerlaw      
- 9) 0.3        1       # axis ratio (b/a)   
-10) 25         1       # position angle (PA)  [Degrees: Up=0, Left=90]
- Z) 0                  #  Skip this model in output image?  (yes=1, no=0)
 
-# Gaussian function
+ 0) expdisk                #  object type
+ 1) 48.5180  51.2800  1 1  #  position x, y
+ 3) 20.0890     1          #  Integrated magnitude	
+ 4) 5.1160      1          #  R_s (scale length)   [pix]
+ 5) 0.0000      0          #     ----- 
+ 6) 0.0000      0          #     ----- 
+ 7) 0.0000      0          #     ----- 
+ 8) 0.0000      0          #     ----- 
+ 9) 0.7570      1          #  axis ratio (b/a)  
+10) -60.3690    1          #  position angle (PA) [deg: Up=0, Left=90]
+ Z) 0                      #  output option (0 = resid., 1 = Don't subtract) 
 
- 0) gaussian           # object type
- 1) 402.3  345.9  1 1  # position x, y        [pixel]
- 3) 18.5       1       # total magnitude     
- 4) 0.5        0       #   FWHM               [pixels]
- 9) 0.3        1       # axis ratio (b/a)   
-10) 25         1       # position angle (PA)  [Degrees: Up=0, Left=90]
- Z) 0                  # leave in [1] or subtract [0] this comp from data?
+
+ 0) gaussian               #  object type
+ 1) 48.5180  51.2800  1 1  #  position x, y
+ 3) 20.0890     1          #  Integrated magnitude	
+ 4) 5.1160      1          #  FWHM   [pix]
+ 5) 0.0000      0          #     ----- 
+ 6) 0.0000      0          #     ----- 
+ 7) 0.0000      0          #     ----- 
+ 8) 0.0000      0          #     ----- 
+ 9) 0.7570      1          #  axis ratio (b/a)  
+10) -60.3690    1          #  position angle (PA) [deg: Up=0, Left=90]
+ Z) 0                      #  output option (0 = resid., 1 = Don't subtract)
+
+
+ 0) ferrer                 #  object type
+ 1) 48.5180  51.2800  1 1  #  position x, y
+ 3) 18.0890     1          #  the surface brightness 	
+ 4) 5.1160      1          #  R_out  [pix]
+ 5) 2.0500      1          #  index alpha
+ 6) 1.250       0          #  index belta 
+ 7) 0.0000      0          #     ----- 
+ 8) 0.0000      0          #     ----- 
+ 9) 0.7570      1          #  axis ratio (b/a)  
+10) -60.3690    1          #  position angle (PA) [deg: Up=0, Left=90]
+ Z) 0                      #  output option (0 = resid., 1 = Don't subtract) 
+
+
+
+ 0) moffat                 #  object type
+ 1) 48.5180  51.2800  1 1  #  position x, y
+ 3) 20.0890     1          #  total magnitude 	
+ 4) 5.1160      1          #  FHWM  [pix]
+ 5) 2.0500      1          #  index n
+ 6) 0.0000      0          #     ----- 
+ 7) 0.0000      0          #     ----- 
+ 8) 0.0000      0          #     ----- 
+ 9) 0.7570      1          #  axis ratio (b/a)  
+10) -60.3690    1          #  position angle (PA) [deg: Up=0, Left=90]
+ Z) 0                      #  output option (0 = resid., 1 = Don't subtract) 
+
+
+ 0) king                   #  object type
+ 1) 48.5180  51.2800  1 1  #  position x, y
+ 3) 18.0890     1          #  the surface brightness 	
+ 4) 5.1160      1          #  R_c    [pix]
+ 5) 10.050      1          #  R_t    [pix] 
+ 6) 1.250       0          #  index alpha 
+ 7) 0.0000      0          #     ----- 
+ 8) 0.0000      0          #     ----- 
+ 9) 0.7570      1          #  axis ratio (b/a)  
+10) -60.3690    1          #  position angle (PA) [deg: Up=0, Left=90]
+ Z) 0                      #  output option (0 = resid., 1 = Don't subtract) 
+
+
+ 0) nuker                  #  object type
+ 1) 48.5180  51.2800  1 1  #  position x, y
+ 3) 18.0890     1          #  the surface brightness 	
+ 4) 5.1160      1          #  R_b   [pix]
+ 5) 1.2490      1          #  power index alpha 
+ 6) 2.2350      0          #  power index belta 
+ 7) 0.5750      0          #  power index gamma 
+ 8) 0.0000      0          #     ----- 
+ 9) 0.7570      1          #  axis ratio (b/a)  
+10) -60.3690    1          #  position angle (PA) [deg: Up=0, Left=90]
+ Z) 0                      #  output option (0 = resid., 1 = Don't subtract) 
 
 """
+
