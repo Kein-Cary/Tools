@@ -10,10 +10,10 @@ from io import StringIO
 #url = "http://skyserver.sdss.org/dr12/en/tools/search/x_sql.aspx"
 #url = 'http://cas.sdss.org/dr7/en/tools/search/sql.asp'
 
-def sdss_sql(url_link, query_str, query_fmt, out_file, id_print = False,):
+def sdss_sql(url_link, query_str, query_fmt, out_file, id_print = False ):
 
     if id_print == True:
-        print( qry )
+        print( query_str )
 
     file = sqlcl.query( query_str, url_link, query_fmt )
 
